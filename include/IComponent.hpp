@@ -12,6 +12,7 @@
 #include <array>
 #include <map>
 #include <utility>
+#include <tuple>
 
 namespace nts
 {
@@ -20,6 +21,16 @@ namespace nts
 		Undefined = (-true),
 		True = true,
 		False = false
+	};
+	enum class Gates
+	{
+		And = 0,
+		NAnd,
+		Or,
+		NOr,
+		Xor,
+		XNor,
+		Not,
 	};
 
 	class IComponent
@@ -38,6 +49,8 @@ namespace nts
 		virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
 	};
+	static std::map<std::string, Tristate> _pins;
+	static std::map <int , std::tuple<Tristate, Tristate, Tristate, Gates>> _link;
 }
 
 std::ostream &operator<<(std::ostream &out, nts::Tristate state);

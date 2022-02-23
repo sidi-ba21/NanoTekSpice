@@ -9,7 +9,8 @@ NAME	=	nanotekspice
 
 SRC_DIR	=	src/
 
-SRC		=	$(SRC_DIR)main.cpp
+SRC		=	$(SRC_DIR)main.cpp		\
+			$(SRC_DIR)Gates.cpp		\
 
 OBJ		=	$(SRC:.cpp=.o)
 
