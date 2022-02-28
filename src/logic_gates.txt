@@ -1,5 +1,5 @@
 
- 
+
  AND Logic Gate
  Truth table :
  +-------------+
@@ -15,7 +15,7 @@
  |  ?   1   ?  |
  |  ?   ?   ?  |
  +-------------+
- 
+
 
  NAND Logic Gate
  Truth table :
@@ -49,8 +49,8 @@
  |  ?   1   1  |
  |  ?   ?   ?  |
  +-------------+
- 
- 
+
+
  NOR Logic Gate
  Truth table :
  +-------------+
@@ -66,8 +66,8 @@
  |  ?   1   0  |
  |  ?   ?   ?  |
  +-------------+
- 
- 
+
+
  XOR Logic Gate
  Truth table :
  +-------------+
@@ -84,7 +84,7 @@
  |  ?   ?   ?  |
  +-------------+
 
- 
+
  XNOR Logic Gate
  Truth table :
  +-------------+
@@ -100,7 +100,7 @@
  |  ?   1   ?  |
  |  ?   ?   ?  |
  +-------------+
- 
+
 
  NOT Logic Gate
  Truth table :

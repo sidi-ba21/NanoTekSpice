@@ -7,14 +7,14 @@
 
 #include "IComponent.hpp"
 #include "Gates.hpp"
+#include "Parser.hpp"
 #include <fstream>
 
 int main(int ac, char **av)
 {
-    if (ac < 2)
-        return (84);
-    std::ifstream file;
-    file.open(av[1]);
+    basic_error(ac, av);
+    load_file_in_mem(av[1]);
+
     std::string a = "a";
     std::string b = "b";
     std::string out = "out";

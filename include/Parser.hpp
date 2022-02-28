@@ -14,4 +14,7 @@ namespace nts {
     
 }
 
+int basic_error(int ac, char **av);
+std::string load_file_in_mem(const char *filepath);
+
 #endif /* !PARSER_HPP_ */
