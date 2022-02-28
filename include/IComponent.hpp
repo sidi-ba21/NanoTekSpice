@@ -13,6 +13,8 @@
 #include <map>
 #include <utility>
 #include <tuple>
+#include <vector>
+#include <functional>
 
 namespace nts
 {
@@ -51,6 +53,11 @@ namespace nts
 	};
 	static std::map<std::string, Tristate> _pins;
 	static std::map <int , std::tuple<Tristate, Tristate, Tristate, Gates>> _link;
+	/*
+	using _map = std::map<std::string, std::unique_ptr<std::tuple<std::string, Tristate>>>;
+	//using _unique = std::unique_ptr<> _pins;
+	static std::map <int , std::tuple<_map, _map, _map, Gates>> _link;
+	*/
 }
 
 std::ostream &operator<<(std::ostream &out, nts::Tristate state);

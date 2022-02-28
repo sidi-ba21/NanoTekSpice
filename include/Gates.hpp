@@ -19,6 +19,7 @@ namespace gate
 	nts::Tristate Xor(nts::Tristate a, nts::Tristate b);
 	nts::Tristate Xnor(nts::Tristate a, nts::Tristate b);
 	nts::Tristate Not(nts::Tristate val);
+	std::string stateToString(nts::Tristate value);
 }
 
 #endif /* !GATES_HPP_ */

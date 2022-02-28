@@ -65,3 +65,22 @@ nts::Tristate gate::Not(nts::Tristate val)
 	}
 	return nts::Tristate::Undefined;
 }
+
+std::string gate::stateToString(nts::Tristate value)
+{
+	if (value == nts::Tristate::True) {
+		return "1";
+	}
+	else if (value == nts::Tristate::False) {
+		return "0";
+	}
+	else {
+		return "U";
+	}
+}
+
+std::ostream &operator<<(std::ostream &out, nts::Tristate state)
+{
+	out << gate::stateToString(state);
+	return out;
+}
