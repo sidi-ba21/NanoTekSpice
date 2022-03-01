@@ -13,16 +13,16 @@ nts::Tristate nts::CircuitPin::compute(std::size_t pin)
     return _pins[pin]->compute();
 }
 
-nts::Tristate nts::CircuitPin::compute(gate::GateFct_2_link gate, 
-                            std::size_t pinA, std::size_t pinB)
-{
-    return gate(_pins[pinA]->compute(), _pins[pinB]->compute());
-}
-
 nts::Tristate nts::CircuitPin::compute(gate::GateFct_1_link gate,
                                         std::size_t pin)
 {
     return gate(_pins[pin]->compute());
+}
+
+nts::Tristate nts::CircuitPin::compute(gate::GateFct_2_link gate, 
+                            std::size_t pinA, std::size_t pinB)
+{
+    return gate(_pins[pinA]->compute(), _pins[pinB]->compute());
 }
 
 void nts::CircuitPin::addInput(IComponent *component, std::size_t pin)

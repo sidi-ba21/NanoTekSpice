@@ -24,10 +24,10 @@ void nts::Pin::dump() const
 	}
     else {
 		std::size_t i(1);
-		for (auto const &link : _links) {
+		for (auto const &tmp : _links) {
 			std::cout << "\tPin[" << _pin << "] (" << i++ << ") = Linked to ";
-			std::cout << "<" << &link.first << ">"
-            << "[" << std::to_string(link.second) << "]" << std::endl;
+			std::cout << "<" << &tmp.first << ">"
+            << "[" << std::to_string(tmp.second) << "]" << std::endl;
 		}
 	}
 }
@@ -39,8 +39,8 @@ bool nts::Pin::isSelf(IComponent &other, std::size_t otherPin) const
 
 bool nts::Pin::linkExists(IComponent &other, std::size_t otherPin) const
 {
-	for (auto const &link : _links) {
-		if (&link.first.get() == &other && link.second == otherPin) {
+	for (auto const &tmp : _links) {
+		if (&tmp.first.get() == &other && tmp.second == otherPin) {
 			return true;
 		}
 	}

@@ -28,7 +28,8 @@ nts::Tristate nts::InPin::compute()
 
 void nts::InPin::link(IComponent &other, std::size_t otherPin)
 {
-
+    _links.emplace_back(other, otherPin);
+	other.setLink(otherPin, _component, _pin);
 }
 
 void nts::InPin::reset()

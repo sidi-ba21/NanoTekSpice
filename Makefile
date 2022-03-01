@@ -11,6 +11,7 @@ SRC_DIR	=	src/
 
 SRC		=	$(SRC_DIR)main.cpp		\
 			$(SRC_DIR)Gates.cpp		\
+			$(SRC_DIR)parsing.cpp	\
 
 OBJ		=	$(SRC:.cpp=.o)
 

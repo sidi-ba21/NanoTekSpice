@@ -30,3 +30,8 @@ nts::Tristate nts::Output::compute(std::size_t pin)
     _value = _pins.compute(1);
 	return _value;
 }
+
+void nts::Output::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
+{
+	_pins.link(pin, other, otherPin);
+}
