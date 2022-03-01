@@ -18,7 +18,7 @@ nts::Tristate nts::Input::compute(std::size_t pin)
 
 void nts::Input::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
 {
-
+	_pin.link(other, otherPin);
 }
 
 void nts::Input::dump() const

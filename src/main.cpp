@@ -14,7 +14,7 @@ int main(int ac, char **av)
 {
     basic_error(ac, av);
     load_file_in_mem(av[1]);
-
+/*
     std::string a = "a";
     std::string b = "b";
     std::string out = "out";
@@ -28,6 +28,6 @@ int main(int ac, char **av)
     else if (std::get<2>(nts::_link[0]) == nts::Tristate::False)
         std::cout << "False" << std::endl;
     else
-        std::cout << "Undefined" << std::endl;
+        std::cout << "Undefined" << std::endl;*/
     return (0);
 }

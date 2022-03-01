@@ -6,6 +6,7 @@
 */
 
 #include "Pin.hpp"
+#include "In_Out_Pin.hpp"
 #include "Gates.hpp"
 #include <memory>
 
@@ -33,7 +34,6 @@ class CircuitPin {
         ~CircuitPin() = default;
 
     private:
-        void assertExists(std::size_t pin) const;
         std::map<std::size_t, std::unique_ptr<Pin>> _pins;
 };
 
