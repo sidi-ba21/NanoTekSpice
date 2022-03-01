@@ -7,8 +7,26 @@
 
 #include "Output.hpp"
 
-nts::Output::Output()
+nts::Output::Output(const std::string& name) : _name(name)
 {
+    _pins.addInput(this, 1);
 }
 
 
+void nts::Output::dump() const
+{
+	std::cout << "[Output] " << "<" << (this) << ">"<< std::endl;
+	std::cout << "\tValue = " << _value << std::endl;
+	_pins.dump();
+}
+
+void nts::Output::display() const
+{
+    std::cout << _name << ": " << _value << std::endl;
+}
+
+nts::Tristate nts::Output::compute(std::size_t pin)
+{
+    _value = _pins.compute(1);
+	return _value;
+}

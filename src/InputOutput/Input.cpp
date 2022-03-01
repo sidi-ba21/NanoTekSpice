@@ -7,7 +7,7 @@
 
 #include "Input.hpp"
 
-nts::Input::Input(const std::string& name) : _name(name), _pin(1)
+nts::Input::Input(const std::string& name) : _name(name), _pin(this, 1)
 { 
 }
 
@@ -25,7 +25,7 @@ void nts::Input::dump() const
 {
 	std::cout << "[Input] " << "<" << (this) << ">"<< std::endl;
 	std::cout << "\tValue = " << _value << std::endl;
-	std::cout << "Pin[1] = Linked to <" << std::endl;
+	_pin.dump();
 }
 
 void nts::Input::setValue(Tristate value)
