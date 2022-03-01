@@ -9,6 +9,7 @@
 #define INPUT_HPP_
 
 #include "Pin.hpp"
+#include "In_Out_Pin.hpp"
 
 namespace nts {
 
@@ -26,7 +27,7 @@ class Input : public IComponent {
     protected:
         Tristate _value{ Tristate::Undefined };
         const std::string _name;
-       std::size_t _pin;
+        OutPin _pin;
 };
 
 }   

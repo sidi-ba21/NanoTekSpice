@@ -24,7 +24,6 @@ void nts::Pin::dump() const
 	}
     else {
 		std::size_t i(1);
-
 		for (auto const &link : _links) {
 			std::cout << "\tPin[" << _pin << "] (" << i++ << ") = Linked to ";
 			std::cout << "<" << &link.first << ">"

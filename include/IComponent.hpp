@@ -51,8 +51,8 @@ namespace nts
 		virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
 	};
-	static std::map<std::string, Tristate> _pins;
-	static std::map <int , std::tuple<Tristate, Tristate, Tristate, Gates>> _link;
+	
+	using Link = std::pair<std::reference_wrapper<IComponent>, std::size_t>;
 	/*
 	using _map = std::map<std::string, std::unique_ptr<std::tuple<std::string, Tristate>>>;
 	//using _unique = std::unique_ptr<> _pins;

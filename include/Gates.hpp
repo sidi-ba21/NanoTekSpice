@@ -20,6 +20,10 @@ namespace gate
 	nts::Tristate Xnor(nts::Tristate a, nts::Tristate b);
 	nts::Tristate Not(nts::Tristate val);
 	std::string stateToString(nts::Tristate value);
+
+	using GateFct_1_link = std::function<nts::Tristate(nts::Tristate)>;
+	using GateFct_2_link = std::function
+		<nts::Tristate(nts::Tristate, nts::Tristate)>;
 }
 
 #endif /* !GATES_HPP_ */

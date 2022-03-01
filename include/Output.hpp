@@ -10,6 +10,7 @@
 
 #include "IComponent.hpp"
 #include "Pin.hpp"
+#include "CircuitPin.hpp"
 
 namespace nts {
 
@@ -26,7 +27,7 @@ class Output : IComponent {
     protected:
         Tristate _value{ Tristate::Undefined };
         const std::string _name;
-        
+        CircuitPin _pins;
 };
 
 }
