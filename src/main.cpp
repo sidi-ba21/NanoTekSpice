@@ -6,6 +6,7 @@
 */
 
 #include "IComponent.hpp"
+#include "Circuit.hpp"
 #include "Gates.hpp"
 #include "Parser.hpp"
 #include <fstream>
@@ -29,5 +30,7 @@ int main(int ac, char **av)
         std::cout << "False" << std::endl;
     else
         std::cout << "Undefined" << std::endl;*/
+    nts::Circuit circuit(av[1]);
+    circuit.run();
     return (0);
 }

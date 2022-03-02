@@ -19,18 +19,18 @@ namespace nts {
 
     class Circuit {
         public:
-            Circuit();
-            ~Circuit();
+            Circuit(char *file);
+            ~Circuit() = default;
             void display();
             void simulate();
-            void stop();
             void loop();
             void dump();
+            void run();
             void set_value();
-            void nts::Circuit::execute(const std::string &name);
+            void execute(const std::string &name);
         protected:
             std::unordered_map<std::string, std::function<void(Circuit &)>> _command;
-            std::size_t _tick;
+            std::size_t _tick {0};
             std::vector<std::weak_ptr<nts::Input>> _inputs;
             std::vector<std::weak_ptr<nts::Output>> _outputs;
     }; 
