@@ -50,6 +50,7 @@ namespace nts
 		virtual Tristate compute(std::size_t pin = 1) = 0;
 		virtual void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) = 0;
 		virtual void dump() const = 0;
+		virtual nts::Tristate reset() = 0;
 	};
 	
 	using Link = std::pair<std::reference_wrapper<IComponent>, std::size_t>;

@@ -21,9 +21,11 @@ class Input : public IComponent {
         void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override final;
         void dump() const override;
 		virtual void setValue(Tristate value);
+        void simulate(std::size_t tick) override {};
         virtual void setValue(std::string const &value) final;
         virtual void display() const;
-
+        const std::string &getName();
+        virtual nts::Tristate reset() final;
     protected:
         Tristate _value{ Tristate::Undefined };
         const std::string _name;

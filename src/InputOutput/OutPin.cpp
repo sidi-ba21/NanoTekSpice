@@ -13,6 +13,8 @@ nts::OutPin::OutPin(IComponent *component, std::size_t pin) :
 
 void nts::OutPin::link(IComponent &other, std::size_t otherPin)
 {
-    _links.emplace_back(other, otherPin);
-	other.setLink(otherPin, _component, _pin);
+    if (!linkExists(other, otherPin)) {
+        _links.emplace_back(other, otherPin);
+	    other.setLink(otherPin, _component, _pin);
+    }
 }

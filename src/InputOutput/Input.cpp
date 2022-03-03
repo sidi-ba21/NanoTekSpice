@@ -18,12 +18,14 @@ nts::Tristate nts::Input::compute(std::size_t pin)
 
 void nts::Input::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
 {
+	if (_pin.linkExists(other, otherPin))
+		return;
 	_pin.link(other, otherPin);
 }
 
 void nts::Input::dump() const
 {
-	std::cout << "[Input] " << "<" << (this) << ">"<< std::endl;
+	std::cout << _name << ": [Input] " << "<" << (this) << ">"<< std::endl;
 	std::cout << "\tValue = " << _value << std::endl;
 	_pin.dump();
 }
@@ -49,4 +51,14 @@ void nts::Input::setValue(std::string const &value)
 void nts::Input::display() const
 {
     std::cout << _name << ": " << _value << std::endl;
+}
+
+const std::string &nts::Input::getName()
+{
+	return (this->_name);
+}
+
+nts::Tristate nts::Input::reset()
+{
+	return (_value);
 }

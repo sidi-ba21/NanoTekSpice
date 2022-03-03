@@ -14,7 +14,7 @@
 
 namespace nts {
 
-class Output : IComponent {
+class Output : public IComponent {
     public:
         Output(const std::string&);
         ~Output() = default;
@@ -23,7 +23,9 @@ class Output : IComponent {
 		void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
 		void dump() const override;
 		virtual void display() const;
-
+        nts::Tristate reset();
+        void simulate(std::size_t tick) override {}
+        const std::string &getName();
     protected:
         Tristate _value{ Tristate::Undefined };
         const std::string _name;

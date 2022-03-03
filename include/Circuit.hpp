@@ -26,14 +26,16 @@ namespace nts {
             void loop();
             void dump();
             void run();
-            void set_value();
+            void reset();
+            void set_value(const std::string &name, const std::string &value);
             void execute(const std::string &name);
         protected:
             std::unordered_map<std::string, std::function<void(Circuit &)>> _command;
             std::size_t _tick {0};
             std::vector<std::weak_ptr<nts::Input>> _inputs;
             std::vector<std::weak_ptr<nts::Output>> _outputs;
-    }; 
+            std::vector<std::shared_ptr<IComponent>> _components;
+    };
 
 }
 
