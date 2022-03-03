@@ -14,7 +14,7 @@ namespace nts {
 
 class True final : public Input {
     public:
-        True();
+        True(const std::string&);
         ~True() = default;
 		void setValue(Tristate value) override;
         void dump() const override;

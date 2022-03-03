@@ -14,10 +14,10 @@ namespace nts {
 
 class Clock final : public Input {
     public:
-        Clock();
+        Clock(const std::string& name);
         ~Clock() = default;
 		void setValue(Tristate value) override;
-        void re_setValue();
+        void resetValue();
         void dump() const override;
 };
 
