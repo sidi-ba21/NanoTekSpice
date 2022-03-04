@@ -8,7 +8,7 @@
 #ifndef INPUT_HPP_
 #define INPUT_HPP_
 
-#include "Pin.hpp"
+#include "IComponent.hpp"
 #include "In_Out_Pin.hpp"
 
 namespace nts {
@@ -26,7 +26,7 @@ class Input : public IComponent {
         virtual void display() const;
         const std::string &getName();
         void set_compute();
-        virtual nts::Tristate reset();
+        virtual nts::Tristate reset() override;
     protected:
         Tristate _value{ Tristate::Undefined };
         const std::string _name;

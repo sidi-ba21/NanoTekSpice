@@ -5,8 +5,10 @@
 ** CircuitPin
 */
 
+#pragma once
+
+#include "IComponent.hpp"
 #include "Pin.hpp"
-#include "In_Out_Pin.hpp"
 #include "Gates.hpp"
 #include <memory>
 
@@ -21,8 +23,8 @@ class CircuitPin {
         CircuitPin(CircuitPin &&) = default;
         CircuitPin &operator=(CircuitPin &&) = default;
 
-        void addInput(IComponent *component, std::size_t pin);
-        void addOutput(IComponent *component, std::size_t pin);
+        void addInput(IComponent *component, size_t size, size_t pin, ...);
+        void addOutput(IComponent *component, size_t size, std::size_t pin, ...);
         Tristate compute(std::size_t pin);
         Tristate compute(gate::GateFct_2_link gate,
                                             std::size_t pinA, std::size_t pinB);

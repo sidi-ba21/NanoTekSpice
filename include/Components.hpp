@@ -9,18 +9,16 @@
 #define COMPONENTS_HPP_
 
 #include "IComponent.hpp"
+#include "Pin.hpp"
+#include "In_Out_Pin.hpp"
+#include "Input.hpp"
+#include "Output.hpp"
+#include "Clock.hpp"
+#include "False.hpp"
+#include "True.hpp"
+#include "4071.hpp"
+#include "4081.hpp"
+#include "CircuitPin.hpp"
 
-namespace nts {
-
-    class Components: public IComponent {
-        public:
-            Components();
-            ~Components();
-
-        protected:
-            
-    };
-
-}
 
 #endif /* !COMPONENTS_HPP_ */

@@ -9,7 +9,7 @@
 
 nts::Output::Output(const std::string& name) : _name(name)
 {
-    _pins.addInput(this, 1);
+    _pins.addInput(this, 1, 1);
 }
 
 

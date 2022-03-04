@@ -11,16 +11,23 @@ SRC_DIR	=	src/
 
 IN_OUT_DIR = InputOutput/
 
-SRC		=	$(SRC_DIR)main.cpp		\
-			$(SRC_DIR)Gates.cpp		\
-			$(SRC_DIR)parsing.cpp	\
-			$(SRC_DIR)Circuit.cpp	\
-			$(SRC_DIR)$(IN_OUT_DIR)Input.cpp	\
-			$(SRC_DIR)$(IN_OUT_DIR)Output.cpp	\
-			$(SRC_DIR)$(IN_OUT_DIR)InPin.cpp	\
-			$(SRC_DIR)$(IN_OUT_DIR)OutPin.cpp	\
-			$(SRC_DIR)$(IN_OUT_DIR)Pin.cpp		\
+COMPONENT =	components/
+
+SRC		=	$(SRC_DIR)main.cpp						\
+			$(SRC_DIR)Gates.cpp						\
+			$(SRC_DIR)parsing.cpp					\
+			$(SRC_DIR)Circuit.cpp					\
+			$(SRC_DIR)$(IN_OUT_DIR)Input.cpp		\
+			$(SRC_DIR)$(IN_OUT_DIR)Output.cpp		\
+			$(SRC_DIR)$(IN_OUT_DIR)InPin.cpp		\
+			$(SRC_DIR)$(IN_OUT_DIR)OutPin.cpp		\
+			$(SRC_DIR)$(IN_OUT_DIR)Pin.cpp			\
 			$(SRC_DIR)$(IN_OUT_DIR)CircuitPin.cpp	\
+			$(SRC_DIR)$(IN_OUT_DIR)True.cpp			\
+			$(SRC_DIR)$(IN_OUT_DIR)False.cpp		\
+			$(SRC_DIR)$(IN_OUT_DIR)Clock.cpp		\
+			$(SRC_DIR)$(COMPONENT)4071.cpp			\
+			$(SRC_DIR)$(COMPONENT)4081.cpp			\
 
 
 OBJ		=	$(SRC:.cpp=.o)

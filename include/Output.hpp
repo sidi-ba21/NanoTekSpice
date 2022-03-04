@@ -9,7 +9,6 @@
 #define OUTPUT_HPP_
 
 #include "IComponent.hpp"
-#include "Pin.hpp"
 #include "CircuitPin.hpp"
 
 namespace nts {
@@ -23,7 +22,7 @@ class Output : public IComponent {
 		void setLink(std::size_t pin, IComponent &other, std::size_t otherPin) override;
 		void dump() const override;
 		virtual void display() const;
-        nts::Tristate reset();
+        nts::Tristate reset() override;
         void simulate(std::size_t tick) override {}
         const std::string &getName();
     protected:

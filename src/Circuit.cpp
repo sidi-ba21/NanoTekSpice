@@ -8,19 +8,27 @@
 #include "Circuit.hpp"
 #include<algorithm>
 #include<csignal>
+#include <exception>
 
 static bool _loop;
 
 nts::Circuit::Circuit(char *av)
 {
-    std::shared_ptr<Input> input = std::move(std::make_unique<nts::Input>("In"));
-    std::shared_ptr<Output> output = std::move(std::make_unique<nts::Output>("Out"));
-    input->setLink(1, *output, 1);
-    _inputs.emplace_back(input);
+    std::shared_ptr<Input> input1 = std::move(std::make_unique<nts::Input>("a"));
+    std::shared_ptr<Input> input2 = std::move(std::make_unique<nts::Input>("b"));
+    std::shared_ptr<Output> output = std::move(std::make_unique<nts::Output>("s"));
+    std::unique_ptr<IComponent> _or(std::make_unique<nts::C4071>("or"));
+    input1->setLink(1, *_or, 1);
+    input2->setLink(1, *_or, 2);
+    _or->setLink(3, *output, 1);
+    _inputs.emplace_back(input1);
+    _inputs.emplace_back(input2);
     _outputs.emplace_back(output);
-    _components.emplace_back(input);
+    _components.emplace_back(input1);
+    _components.emplace_back(input2);
+    _components.emplace_back(std::move(_or));
     _components.emplace_back(output);
-    
+
     _command["loop"] = [](Circuit &c) {c.loop();};
     _command["simulate"] = [](Circuit &c) {c.simulate();};
     _command["dump"] = [](Circuit &c) {c.dump();};
@@ -78,7 +86,7 @@ void nts::Circuit::set_value(const std::string &name, const std::string &value)
             return;
         }
     }
-    std::cout << "Input error: 'a' doesn't exist." << std::endl;
+    throw std::runtime_error("Input error: 'a' doesn't exist.");
 }
 
 void nts::Circuit::run()
