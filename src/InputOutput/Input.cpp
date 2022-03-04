@@ -13,6 +13,7 @@ nts::Input::Input(const std::string& name) : _name(name), _pin(this, 1)
 
 nts::Tristate nts::Input::compute(std::size_t pin)
 {
+	_compute = true;
     return _value;
 }
 
@@ -32,6 +33,7 @@ void nts::Input::dump() const
 
 void nts::Input::setValue(Tristate value)
 {
+	_compute = false;
 	_value = value;
 }
 

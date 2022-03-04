@@ -25,10 +25,12 @@ class Input : public IComponent {
         virtual void setValue(std::string const &value) final;
         virtual void display() const;
         const std::string &getName();
-        virtual nts::Tristate reset() final;
+        void set_compute();
+        virtual nts::Tristate reset();
     protected:
         Tristate _value{ Tristate::Undefined };
         const std::string _name;
+        bool _compute {false};
         OutPin _pin;
 };
 

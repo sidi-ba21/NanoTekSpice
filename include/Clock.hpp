@@ -19,6 +19,7 @@ class Clock final : public Input {
 		void setValue(Tristate value) override;
         void resetValue();
         void dump() const override;
+        nts::Tristate reset() override;
 };
 
 }

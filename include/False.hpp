@@ -18,6 +18,7 @@ class False final : public Input {
         ~False() = default;
 		void setValue(Tristate value) override;
         void dump() const override;
+        nts::Tristate reset() override;
 };
 
 }

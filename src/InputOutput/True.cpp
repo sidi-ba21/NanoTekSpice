@@ -23,3 +23,8 @@ void nts::True::dump() const
 	std::cout << "\tValue = " << _value << std::endl;
 	_pin.dump();
 }
+
+nts::Tristate nts::True::reset()
+{
+	return (_value);
+}

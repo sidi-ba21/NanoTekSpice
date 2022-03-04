@@ -7,6 +7,9 @@
 
 #include "Circuit.hpp"
 #include<algorithm>
+#include<csignal>
+
+static bool _loop;
 
 nts::Circuit::Circuit(char *av)
 {
@@ -46,9 +49,18 @@ void nts::Circuit::simulate()
 	}
 }
 
+void stops(int)
+{
+    _loop = true;
+}
+
 void nts::Circuit::loop()
 {
-
+    _loop = false;
+	std::signal(SIGINT, stops);
+	while (!_loop)
+		simulate();
+	std::signal(SIGINT, SIG_DFL);
 }
 
 void nts::Circuit::dump()

@@ -11,6 +11,9 @@
 #include "IComponent.hpp"
 #include "Input.hpp"
 #include "Output.hpp"
+#include "Clock.hpp"
+#include "False.hpp"
+#include "True.hpp"
 #include <functional>
 #include <unordered_map>
 #include <memory>

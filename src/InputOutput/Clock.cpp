@@ -30,3 +30,10 @@ void nts::Clock::resetValue()
 	else if (_value == Tristate::True)
 		_value = Tristate::False;
 }
+
+nts::Tristate nts::Clock::reset()
+{
+	if (_compute == true)
+		resetValue();
+	return (_value);
+}
