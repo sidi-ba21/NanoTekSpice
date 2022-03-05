@@ -54,8 +54,10 @@ void nts::Circuit::loop()
 {
     _loop = false;
 	std::signal(SIGINT, stops);
-	while (!_loop)
+	while (!_loop) {
 		simulate();
+        display();
+    }
 	std::signal(SIGINT, SIG_DFL);
 }
 
@@ -192,7 +194,7 @@ void nts::Circuit::createClock(const std::string &name)
 	_inputs.emplace_back(input);
 }
 /*
-void nts::Circuit::createTerminal(const std::string &name)
+void nts::Circuit::createLogger(const std::string &name)
 {
 	std::shared_ptr<Logger> logger = std::move(_factories.createLogger(name));
 
