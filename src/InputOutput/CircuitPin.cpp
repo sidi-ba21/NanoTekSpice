@@ -53,9 +53,8 @@ void nts::CircuitPin::addOutput(IComponent *component,
 
 void nts::CircuitPin::pinExists(std::size_t pin) const
 {
-    if (_pins.find(pin) == _pins.end()) {
+    if (_pins.find(pin) == _pins.end())
 		throw std::exception();
-	}
 }
 
 bool nts::CircuitPin::isLinked(std::size_t pin) const
