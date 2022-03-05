@@ -10,7 +10,7 @@
 nts::C4081::C4081(const std::string &name) : _name(name)
 {
     _pins.addInput(this, 8, 1, 2, 5, 6, 8, 9, 12, 13);
-    _pins.addOutput(this, 6, 3, 4, 7, 10, 11, 14);
+    _pins.addOutput(this, 4, 3, 4, 10, 11);
 }
 
 void nts::C4081::dump() const

@@ -28,7 +28,10 @@ SRC		=	$(SRC_DIR)main.cpp						\
 			$(SRC_DIR)$(IN_OUT_DIR)Clock.cpp		\
 			$(SRC_DIR)$(COMPONENT)4071.cpp			\
 			$(SRC_DIR)$(COMPONENT)4081.cpp			\
-
+			$(SRC_DIR)$(COMPONENT)4001.cpp			\
+			$(SRC_DIR)$(COMPONENT)4011.cpp			\
+			$(SRC_DIR)$(COMPONENT)4030.cpp			\
+			$(SRC_DIR)$(COMPONENT)4069.cpp			\
 
 OBJ		=	$(SRC:.cpp=.o)
 
