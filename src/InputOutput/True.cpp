@@ -19,7 +19,7 @@ void nts::True::setValue(Tristate value)
 
 void nts::True::dump() const
 {
-	std::cout << _name << ": [True] " << "<" << (this) << ">"<< std::endl;
+	std::cout << _name << ": [True] " << "<" << &(*this) << ">"<< std::endl;
 	std::cout << "\tValue = " << _value << std::endl;
 	_pin.dump();
 }

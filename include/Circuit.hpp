@@ -22,7 +22,7 @@ namespace nts {
             Circuit(char *file);
             ~Circuit() = default;
             void display();
-            void simulate();
+            void simulate(size_t tick = 1);
             void loop();
             void dump();
             void run();

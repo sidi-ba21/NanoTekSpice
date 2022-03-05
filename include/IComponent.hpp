@@ -54,11 +54,6 @@ namespace nts
 	};
 	
 	using Link = std::pair<std::reference_wrapper<IComponent>, std::size_t>;
-	/*
-	using _map = std::map<std::string, std::unique_ptr<std::tuple<std::string, Tristate>>>;
-	//using _unique = std::unique_ptr<> _pins;
-	static std::map <int , std::tuple<_map, _map, _map, Gates>> _link;
-	*/
 }
 
 std::ostream &operator<<(std::ostream &out, nts::Tristate state);

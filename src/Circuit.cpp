@@ -35,9 +35,10 @@ void nts::Circuit::display()
 	}
 }
 
-void nts::Circuit::simulate()
+void nts::Circuit::simulate(size_t tick)
 {
-	_tick++;
+    if (tick != 0)
+        _tick++;
     reset();
 	for (auto const &output : _outputs) {
 		output.lock()->compute();
@@ -67,10 +68,12 @@ void nts::Circuit::dump()
 
 void nts::Circuit::set_value(const std::string &name, const std::string &value)
 {
-    try {
-        std::stoi(value);
-    } catch (std::exception const &e) {
-        throw std::runtime_error("Input value must be either 0 or 1.");
+    if (value.compare("U") != 0) {
+        try {
+            std::stoi(value);
+        } catch (std::exception const &e) {
+            throw std::runtime_error("Input value must be either 0 or 1 or U.");
+        }
     }
     for (auto &comp : _inputs) {
         if (comp.lock()->getName().compare(name) == 0) {
@@ -78,13 +81,13 @@ void nts::Circuit::set_value(const std::string &name, const std::string &value)
             return;
         }
     }
-    throw std::runtime_error("Input error: 'a' doesn't exist.");
+    throw std::runtime_error("Input error: Components doesn't exist.");
 }
 
 void nts::Circuit::run()
 {
     std::string cmd;
-
+    simulate(0);
     std::cout << "> " << std::flush;
     while (std::getline(std::cin, cmd) && cmd.compare("exit")) {
         try {
@@ -123,14 +126,14 @@ void nts::Circuit::createComponent()
 {
     auto tmp = file.getChipsets();
     for (auto const &chipsets : tmp) {
-        if (_components.find(chipsets.name) != _components.end()) {
+        if (_components.find(chipsets.second) != _components.end()) {
 		    throw "Components name already exists.";
 	    }
-        if (special_create(chipsets.name, chipsets.type));
+        if (special_create(chipsets.second, chipsets.first));
         else {
             auto component
-                (_factories.createComponent(chipsets.type, chipsets.name));
-            _components[chipsets.name] = std::move(component);
+                (_factories.createComponent(chipsets.first, chipsets.second));
+            _components[chipsets.second] = std::move(component);
         }
     }
 }

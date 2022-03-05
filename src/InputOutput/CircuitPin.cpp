@@ -12,18 +12,22 @@
 
 nts::Tristate nts::CircuitPin::compute(std::size_t pin)
 {
+    pinExists(pin);
     return _pins[pin]->compute();
 }
 
 nts::Tristate nts::CircuitPin::compute(gate::GateFct_1_link gate,
                                         std::size_t pin)
 {
+    pinExists(pin);
     return gate(_pins[pin]->compute());
 }
 
 nts::Tristate nts::CircuitPin::compute(gate::GateFct_2_link gate, 
                             std::size_t pinA, std::size_t pinB)
 {
+    pinExists(pinA);
+    pinExists(pinB);
     return gate(_pins[pinA]->compute(), _pins[pinB]->compute());
 }
 
@@ -47,9 +51,16 @@ void nts::CircuitPin::addOutput(IComponent *component,
         _pins[pin] = std::make_unique<OutPin>(component, pin);
 }
 
+void nts::CircuitPin::pinExists(std::size_t pin) const
+{
+    if (_pins.find(pin) == _pins.end()) {
+		throw std::exception();
+	}
+}
+
 bool nts::CircuitPin::isLinked(std::size_t pin) const
 {
-    auto const tmp{ _pins.find(pin) };
+    auto const tmp(_pins.find(pin));
 
     if (tmp != _pins.end())
         return tmp->second->isLinked();
@@ -71,5 +82,6 @@ void nts::CircuitPin::reset()
 
 void nts::CircuitPin::link(std::size_t pin, IComponent &other, std::size_t otherPin)
 {
+    pinExists(pin);
 	_pins[pin]->link(other, otherPin);
 }
