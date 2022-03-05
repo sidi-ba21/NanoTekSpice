@@ -15,7 +15,7 @@ COMPONENT =	components/
 
 SRC		=	$(SRC_DIR)main.cpp						\
 			$(SRC_DIR)Gates.cpp						\
-			$(SRC_DIR)parsing.cpp					\
+			$(SRC_DIR)Parsing.cpp					\
 			$(SRC_DIR)Circuit.cpp					\
 			$(SRC_DIR)$(IN_OUT_DIR)Input.cpp		\
 			$(SRC_DIR)$(IN_OUT_DIR)Output.cpp		\
@@ -32,6 +32,7 @@ SRC		=	$(SRC_DIR)main.cpp						\
 			$(SRC_DIR)$(COMPONENT)4011.cpp			\
 			$(SRC_DIR)$(COMPONENT)4030.cpp			\
 			$(SRC_DIR)$(COMPONENT)4069.cpp			\
+			$(SRC_DIR)Error.cpp						\
 
 OBJ		=	$(SRC:.cpp=.o)
 
