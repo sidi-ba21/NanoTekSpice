@@ -72,11 +72,11 @@ void Parser::fill_array()
             throw std::exception();
         _links.push_back((links){(link){tmp, stmp},(link){tmp2, stmp2}});
     }
-    std::vector<links>::iterator ml;
-    for (ml = _links.begin(); ml != _links.end(); ml++) {
-        std::cout << ml->first.name << "-> " << "<---->" << ml->first.pin
-             << ml->second.name << "->" << ml->second.pin << "\n";
-    }
+    //std::vector<links>::iterator ml;
+    //for (ml = _links.begin(); ml != _links.end(); ml++) {
+    //    std::cout << ml->first.name << "-> " << "<---->" << ml->first.pin
+    //         << ml->second.name << "->" << ml->second.pin << "\n";
+    //}
 }
 
 int Parser::disp()
