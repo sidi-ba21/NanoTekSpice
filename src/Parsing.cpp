@@ -7,6 +7,7 @@
 
 #include "Parser.hpp"
 #include "Error.hpp"
+#include <algorithm>
 
 bool is_number(const std::string &s)
 {
@@ -49,8 +50,8 @@ int Parser::load_file_in_mem(const char *filepath)
         if (_str[0] == ':' || (_str[0] == '.' && 
             (_str.compare(".chipsets:") != 0 && _str.compare(".links:") != 0)))
             throw std::exception();
-     //   if (check && !if_right_arg(tmp))
-     //       throw std::exception();
+        if (check && !if_right_arg(tmp))
+            throw std::exception();
         if (_str.compare(".chipsets:") == 0 || _str.compare(".links:") == 0) {
             check = true;
             tmp = _str;
@@ -71,7 +72,7 @@ void Parser::fill_array()
     if (tmp.compare(".chipsets") != 0)
         throw std::exception();
     while (_buff >> tmp && tmp.compare(".links") != 0 && _buff >> tmp2) {
-        _chipsets.push_back((chipset){tmp, tmp2});
+        _chipsets.push_back(std::make_pair(tmp, tmp2));
         count++;
     }
     if (tmp.compare(".links") != 0 || count == 0)
@@ -121,6 +122,7 @@ bool Parser::if_right_arg(const std::string &section)
 
 std::vector<chipset> Parser::getChipsets()
 {
+    sort(_chipsets.begin(), _chipsets.end());
     return (_chipsets);
 }
 
