@@ -64,3 +64,4 @@ namespace nts
 std::ostream &operator<<(std::ostream &out, nts::Tristate state);
 
 #endif /* !ICOMPONENT_HPP_ */
+	

@@ -14,6 +14,7 @@ nts::Input::Input(const std::string& name) : _name(name), _pin(this, 1)
 nts::Tristate nts::Input::compute(std::size_t pin)
 {
 	_compute = true;
+	_value = _before;
     return _value;
 }
 
@@ -34,11 +35,13 @@ void nts::Input::dump() const
 void nts::Input::setValue(Tristate value)
 {
 	_compute = false;
-	_value = value;
+	_before = value;
 }
 
 void nts::Input::setValue(std::string const &value)
 {
+	if (std::stoi(value) != 0 && std::stoi(value) != 1)
+		throw std::runtime_error("Input value must be either 0 or 1.");
 	if (value.compare("1") == 0) {
 		setValue(Tristate::True);
 	}

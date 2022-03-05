@@ -46,6 +46,8 @@ class Parser {
         void fill_array();
         int disp();
         bool if_right_arg(const std::string &section);
+        std::vector<chipset> getChipsets();
+        std::vector<links> getLinks();
     private:
         const char *_filepath;
         std::string _str;

@@ -11,33 +11,24 @@
 #include "Parser.hpp"
 #include <fstream>
 
+int basic_error(int ac, char **av)
+{
+    if (ac < 2) {
+        std::cerr << "Nanoteksptice: Usage: ./nanotekspice file.nts" << std::endl;
+        exit(84);
+    }
+    return 0;
+}
+
 int main(int ac, char **av)
 {
+    basic_error(ac, av);
     try {
-    Parser test(av[1]);
-
-    test.disp();
-    }   catch (std::exception const &e) {
+        nts::Circuit circuit(av[1]);
+        circuit.run();
+    } catch (std::exception const &e) {
         std::cout << e.what() << std::endl;
         exit (84);
     }
-
-/*
-    std::string a = "a";
-    std::string b = "b";
-    std::string out = "out";
-    nts::_pins[a] = nts::Tristate::False;
-    nts::_pins[b] = nts::Tristate::False;
-    nts::_pins[out] = nts::Tristate::Undefined;
-    nts::_link[0] = std::make_tuple(nts::_pins[a], nts::_pins[b], nts::_pins[out], nts::Gates::Xor);
-    std::get<2>(nts::_link[0]) = gate::Or(std::get<0>(nts::_link[0]), std::get<1>(nts::_link[0]));
-    if (std::get<2>(nts::_link[0]) == nts::Tristate::True)
-        std::cout << "True" << std::endl;
-    else if (std::get<2>(nts::_link[0]) == nts::Tristate::False)
-        std::cout << "False" << std::endl;
-    else
-        std::cout << "Undefined" << std::endl;*/
-    nts::Circuit circuit(av[1]);
-    circuit.run();
     return (0);
 }

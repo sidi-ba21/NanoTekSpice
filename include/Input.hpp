@@ -29,6 +29,7 @@ class Input : public IComponent {
         virtual nts::Tristate reset() override;
     protected:
         Tristate _value{ Tristate::Undefined };
+        Tristate _before { Tristate::Undefined };
         const std::string _name;
         bool _compute {false};
         OutPin _pin;

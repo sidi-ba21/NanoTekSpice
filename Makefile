@@ -33,6 +33,7 @@ SRC		=	$(SRC_DIR)main.cpp						\
 			$(SRC_DIR)$(COMPONENT)4030.cpp			\
 			$(SRC_DIR)$(COMPONENT)4069.cpp			\
 			$(SRC_DIR)Error.cpp						\
+			$(SRC_DIR)Factory.cpp					\
 
 OBJ		=	$(SRC:.cpp=.o)
 

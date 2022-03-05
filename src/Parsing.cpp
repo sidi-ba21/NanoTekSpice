@@ -8,14 +8,6 @@
 #include "Parser.hpp"
 #include "Error.hpp"
 
-int basic_error(int ac, char **av)
-{
-    if (ac < 2) {
-        std::cerr << "Nanoteksptice: Usage: ./nanotekspice file.nts" << std::endl;
-        exit(84);
-    }
-    return 0;
-}
 bool is_number(const std::string &s)
 {
   return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
@@ -25,6 +17,7 @@ Parser::Parser(const char *filepath)
 : _filepath(filepath)
 {
     load_file_in_mem(filepath);
+    fill_array();
 }
 
 Parser::~Parser()
@@ -98,7 +91,7 @@ void Parser::fill_array()
 int Parser::disp()
 {
     std::cout << _str << std::endl;
-    fill_array();
+//    fill_array();
     return 0;
 }
 
@@ -124,4 +117,14 @@ bool Parser::if_right_arg(const std::string &section)
             return false;
     }
     return (true);
+}
+
+std::vector<chipset> Parser::getChipsets()
+{
+    return (_chipsets);
+}
+
+std::vector<links> Parser::getLinks()
+{
+    return (_links);
 }
