@@ -49,8 +49,8 @@ int Parser::load_file_in_mem(const char *filepath)
         if (_str[0] == ':' || (_str[0] == '.' && 
             (_str.compare(".chipsets:") != 0 && _str.compare(".links:") != 0)))
             throw std::exception();
-        if (check && !if_right_arg(tmp))
-            throw std::exception();
+     //   if (check && !if_right_arg(tmp))
+     //       throw std::exception();
         if (_str.compare(".chipsets:") == 0 || _str.compare(".links:") == 0) {
             check = true;
             tmp = _str;
@@ -91,7 +91,6 @@ void Parser::fill_array()
 int Parser::disp()
 {
     std::cout << _str << std::endl;
-//    fill_array();
     return 0;
 }
 
@@ -102,19 +101,20 @@ bool Parser::if_right_arg(const std::string &section)
     temp << std::regex_replace(_str, space_re, " ") << std::endl;
     std::string arg;
     _arg.clear();
-
     while (std::getline(temp, arg, ' ')) {
 		if (arg.size() > 0)
 			_arg.push_back(arg);
 	}
     if (section.compare(".chipsets:") == 0) {
-        if (_arg.size() != 2)
+        if (_arg.size() != 2 && arg.compare("\n") != 0) {
             return false;
+        }
     }
-    if (section.compare(".links:") == 0 &&
+    else if (section.compare(".links:") == 0 &&
     temp.str().compare(0, 6,".links") != 0) {
-        if (_arg.size() != 4)
+        if (_arg.size() != 4 && arg.compare("\n") != 0) {
             return false;
+        }
     }
     return (true);
 }

@@ -25,10 +25,10 @@ void nts::Clock::dump() const
 
 void nts::Clock::resetValue()
 {
-    if (_value == Tristate::False)
-		_value = Tristate::True;
+    if (_before == Tristate::False)
+		setValue(Tristate::True);
 	else if (_value == Tristate::True)
-		_value = Tristate::False;
+		setValue(Tristate::False);
 }
 
 nts::Tristate nts::Clock::reset()

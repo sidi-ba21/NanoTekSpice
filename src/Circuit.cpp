@@ -16,7 +16,6 @@ nts::Circuit::Circuit(char *av) : file(av)
 {
     createComponent();
     createLink();
-    file.disp();
     _command["loop"] = [](Circuit &c) {c.loop();};
     _command["simulate"] = [](Circuit &c) {c.simulate();};
     _command["dump"] = [](Circuit &c) {c.dump();};
