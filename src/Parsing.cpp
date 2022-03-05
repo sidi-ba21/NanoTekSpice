@@ -42,6 +42,7 @@ int Parser::load_file_in_mem(const char *filepath)
     std::ifstream file(filepath);
     std::string tmp;
     bool check = false;
+
     if (!file.is_open())
         throw std::exception();
     while (std::getline(file, _str)) {
@@ -99,25 +100,24 @@ bool Parser::if_right_arg(const std::string &section)
 {
     std::regex space_re("[(\\s):]");
     std::stringstream temp;
-    temp << std::regex_replace(_str, space_re, " ") << std::endl;
     std::string arg;
-    _arg.clear();
+    std::size_t i = 0;
+
+    temp << std::regex_replace(_str, space_re, " ") << std::endl;
     while (std::getline(temp, arg, ' ')) {
 		if (arg.size() > 0)
-			_arg.push_back(arg);
+            i++;
 	}
     if (section.compare(".chipsets:") == 0) {
-        if (_arg.size() != 2 && arg.compare("\n") != 0) {
+        if (i != 2 && arg.compare("\n") != 0)
             return false;
-        }
     }
-    else if (section.compare(".links:") == 0 &&
+    if (section.compare(".links:") == 0 &&
     temp.str().compare(0, 6,".links") != 0) {
-        if (_arg.size() != 4 && arg.compare("\n") != 0) {
+        if (i != 4 && arg.compare("\n") != 0)
             return false;
-        }
     }
-    return (true);
+    return true;
 }
 
 std::vector<chipset> Parser::getChipsets()
