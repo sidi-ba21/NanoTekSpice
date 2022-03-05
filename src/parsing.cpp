@@ -5,31 +5,8 @@
 ** parsing
 */
 
-
-#include <algorithm>
-#include <cassert>
-#include <cctype>
-#include <locale>
-
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <vector>
-
-//#include <bits/stdc++.h>
-//#include <iostream>
-
-struct Chipset {
-  std::string type;
-  std::string name;
-};
-
-struct Links {
-  std::string name;
-  std::string gate;
-};
+#include "Parser.hpp"
+#include "Error.hpp"
 
 int basic_error(int ac, char **av)
 {
@@ -40,80 +17,73 @@ int basic_error(int ac, char **av)
     return 0;
 }
 
-int find_chipsets(std::string data)
+Parser::Parser(const char *filepath)
+: _filepath(filepath)
 {
-    std::size_t chipset;
-    std::size_t links;
-    std::string wordd;
-    std::string word;
-    std::vector<Chipset> *tab_chipset = new std::vector<Chipset>[20];
-    std::vector<Links> *tab_links = new std::vector<Links>[20];
+    load_file_in_mem(filepath);
+}
 
-    chipset = data.find(".chipsets:");
-    std::stringstream test = std::stringstream(&data[chipset]);
-    
-    test >> word;
-    std::cout << word << std::endl;
-    while (test >> word && word.compare(".links:") != 0 && test >> wordd) {
-        tab_chipset->push_back((Chipset){word, wordd}); 
+Parser::~Parser()
+{
+
+}
+
+void Parser::clean_buffer()
+{
+    std::regex space_re("[(\\s+):]");
+
+    auto first{ std::find_if(_str.begin(), _str.end(), [](char c) {
+        return c == '#';
+    }) };
+    _str.erase(first, _str.end());
+    if (_str.length() > 0)
+        _buff << std::regex_replace(_str, space_re, " ") << std::endl;
+}
+
+int Parser::load_file_in_mem(const char *filepath)
+{
+    std::ifstream file(filepath);
+
+    if (!file.is_open())
+        throw std::exception();
+    while (std::getline(file, _str)) {
+        clean_buffer();
     }
-    std::vector<Chipset>::iterator mc;
-    for (mc = tab_chipset->begin(); mc != tab_chipset->end(); mc++) {
-        std::cout << mc->type << "-> "
-             << mc->name << "\n";
-    }
-    std::cout << word << std::endl;
-    while (test >> word && test >> wordd) {
-        tab_links->push_back((Links){word, wordd}); 
-    }
-    std::vector<Links>::iterator ml;
-    for (ml = tab_links->begin(); ml != tab_links->end(); ml++) {
-        std::cout << ml->name << "-> "
-             << ml->gate << "\n";
-    }
-    //std::map<std::string, std::string>::iterator m;
-    //for (m = FW.begin(); m != FW.end(); m++) {
-    //    std::cout << m->first << "-> "
-    //         << m->second << "\n";
-    //}
-    //for (int i = 0; i < 10; i++)
-    //    tab[i] << test;
-    //.insert(std::make_pair("earth", 1));
-    //FW[word] = wordd;
+    _str = _buff.str();
     return 0;
 }
 
-std::string load_file_in_mem(const char *filepath)
+void Parser::fill_array()
 {
-    std::string data;
-    std::ifstream file(filepath);
-    std::stringstream buffer;
+    std::string tmp;
+    std::string tmp2;
+    std::size_t stmp;
+    std::size_t stmp2;
 
-    if (!file.is_open()) {
-       std::cerr << "Nanotekspice: " << filepath << ": No such file or directory\n";
-       return NULL;
+    _buff >> tmp;
+    if (tmp.compare(".chipsets") != 0)
+        throw std::exception();
+    while (_buff >> tmp && tmp.compare(".links") != 0 && _buff >> tmp2)
+        _chipsets.push_back((chipset){tmp, tmp2});
+    if (tmp.compare(".links") != 0)
+        throw std::exception();
+    while (_buff >> tmp >> stmp && _buff >> tmp2 >> stmp2) {
+        _links.push_back((links){(link){tmp, stmp},(link){tmp2, stmp2}});
     }
-    buffer << file.rdbuf();
-    data = buffer.str();
-    find_chipsets(data);
-    return data;
+    //std::vector<links>::iterator ml;
+    //for (ml = _links.begin(); ml != _links.end(); ml++) {
+    //    std::cout << ml->first.name << "-> " << "<---->" << ml->first.pin
+    //         << ml->second.name << "->" << ml->second.pin << "\n";
+    //}
 }
 
-//int purge(std::string data)
-//{
-//    clean_comment(data);
-//    clean_space(data);
-//}
-//
-//int clean_comment(std::string data)
-//{
-//    for (int i = 0; i < )
-//        if (data[i] == '#')
-//    std::find_if()
-//
-//}
-//
-//int clean_space(std::string data)
-//{
-//
-//}
+int Parser::disp()
+{
+    try {
+        fill_array();
+    } catch (MissionCriticalError const &e) {
+        std::cout << e.what() << std::endl;
+        exit (84);
+    }
+    return 0;
+}

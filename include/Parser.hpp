@@ -1,20 +1,57 @@
 /*
 ** EPITECH PROJECT, 2022
-** B-OOP-400-PAR-4-1-tekspice-geraud.deltour
+** Parsing
 ** File description:
-** Parser
+** Parsing
 */
 
-#ifndef PARSER_HPP_
-#define PARSER_HPP_
-
+#include <algorithm>
+#include <cassert>
+#include <cctype>
+#include <locale>
 #include "IComponent.hpp"
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <vector>
+#include <regex>
+
+#ifndef PARSERG_HPP_
+#define PARSERG_HPP_
+
+struct chipset {
+  std::string type;
+  std::string name;
+};
+
+struct link {
+    std::string name;
+    std::size_t pin;
+};
+
+using links = std::pair<link, link>;
 
 namespace nts {
     
 }
 
-int basic_error(int ac, char **av);
-std::string load_file_in_mem(const char *filepath);
+class Parser {
+    public:
+        Parser(const char *filepath);
+        ~Parser();
+        int load_file_in_mem(const char *file);
+        void clean_buffer();
+        void fill_array();
+        int disp();
+    protected:
+    private:
+        const char *_filepath;
+        std::string _str;
+        std::stringstream _buff;
+        std::vector<chipset> _chipsets;
+        std::vector<links> _links;
+};
 
 #endif /* !PARSER_HPP_ */
