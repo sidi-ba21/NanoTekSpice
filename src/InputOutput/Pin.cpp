@@ -19,14 +19,14 @@ void nts::Pin::dump() const
 	}
     else if (_links.size() == 1) {
 		std::cout << "\tPin[" << _pin << "] = Linked to ";
-		std::cout << "<" << &_links[0].first << ">"
+		std::cout << "<" << &_links[0].first.get() << ">"
         << "[" << std::to_string(_links[0].second) << "]" << std::endl;
 	}
     else {
 		std::size_t i(1);
 		for (auto const &tmp : _links) {
 			std::cout << "\tPin[" << _pin << "] (" << i++ << ") = Linked to ";
-			std::cout << "<" << &tmp.first << ">"
+			std::cout << "<" << &tmp.first.get() << ">"
             << "[" << std::to_string(tmp.second) << "]" << std::endl;
 		}
 	}

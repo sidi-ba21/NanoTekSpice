@@ -15,18 +15,20 @@ nts::Output::Output(const std::string& name) : _name(name)
 
 void nts::Output::dump() const
 {
-	std::cout << _name << ": [Output] " << "<" << (this) << ">"<< std::endl;
+	std::cout << _name << ": [Output] " << "<" << &(*this) << ">"<< std::endl;
 	std::cout << "\tValue = " << _value << std::endl;
 	_pins.dump();
 }
 
 void nts::Output::display() const
 {
-    std::cout << _name << ": " << _value << std::endl;
+    std::cout << "  " << _name << ": " << _value << std::endl;
 }
 
 nts::Tristate nts::Output::compute(std::size_t pin)
 {
+	if (!_pins.isLinked(1))
+		throw std::exception();
 	_value = _pins.compute(1);
 	return _value;
 }

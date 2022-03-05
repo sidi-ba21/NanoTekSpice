@@ -33,6 +33,7 @@ class CircuitPin {
         void link(std::size_t pin, IComponent &other, std::size_t otherPin);
         void dump() const;
         void reset();
+        void pinExists(std::size_t pin) const;
         ~CircuitPin() = default;
 
     private:

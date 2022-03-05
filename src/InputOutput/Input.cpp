@@ -20,14 +20,14 @@ nts::Tristate nts::Input::compute(std::size_t pin)
 
 void nts::Input::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
 {
-	if (_pin.linkExists(other, otherPin))
-		return;
+	if (pin != 1)
+		throw std::exception();
 	_pin.link(other, otherPin);
 }
 
 void nts::Input::dump() const
 {
-	std::cout << _name << ": [Input] " << "<" << (this) << ">"<< std::endl;
+	std::cout << _name << ": [Input] " << "<" << &(*this) << ">"<< std::endl;
 	std::cout << "\tValue = " << _value << std::endl;
 	_pin.dump();
 }
@@ -40,22 +40,24 @@ void nts::Input::setValue(Tristate value)
 
 void nts::Input::setValue(std::string const &value)
 {
-	if (std::stoi(value) != 0 && std::stoi(value) != 1)
-		throw std::runtime_error("Input value must be either 0 or 1.");
+	if (value.compare("U") != 0 && std::stoi(value) != 0 && 
+	std::stoi(value) != 1)
+		throw std::runtime_error("Input value must be either 0 or 1 or U.");
 	if (value.compare("1") == 0) {
 		setValue(Tristate::True);
 	}
 	else if (value.compare("0") == 0) {
 		setValue(Tristate::False);
 	}
-	else {
+	else if (value.compare("U") == 0) {
 		setValue(Tristate::Undefined);
 	}
+	throw std::runtime_error("Input value must be either 0 or 1 or U.");
 }
 
 void nts::Input::display() const
 {
-    std::cout << _name << ": " << _value << std::endl;
+    std::cout << "  " << _name << ": " << _value << std::endl;
 }
 
 const std::string &nts::Input::getName()
