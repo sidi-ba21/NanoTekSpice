@@ -49,8 +49,8 @@ int Parser::load_file_in_mem(const char *filepath)
         if (_str[0] == ':' || (_str[0] == '.' && 
             (_str.compare(".chipsets:") != 0 && _str.compare(".links:") != 0)))
             throw std::exception();
-     //   if (check && !if_right_arg(tmp))
-     //       throw std::exception();
+        if (check && !if_right_arg(tmp))
+            throw std::exception();
         if (_str.compare(".chipsets:") == 0 || _str.compare(".links:") == 0) {
             check = true;
             tmp = _str;
@@ -67,6 +67,7 @@ void Parser::fill_array()
     std::string pin1;
     std::string pin2;
     std::size_t count = 0;
+
     _buff >> tmp;
     if (tmp.compare(".chipsets") != 0)
         throw std::exception();
