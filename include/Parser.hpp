@@ -45,11 +45,12 @@ class Parser {
         void clean_buffer();
         void fill_array();
         int disp();
-    protected:
+        bool if_right_arg(const std::string &section);
     private:
         const char *_filepath;
         std::string _str;
         std::stringstream _buff;
+        std::vector<std::string> _arg;
         std::vector<chipset> _chipsets;
         std::vector<links> _links;
 };

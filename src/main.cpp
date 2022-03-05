@@ -13,8 +13,15 @@
 
 int main(int ac, char **av)
 {
-    basic_error(ac, av);
-    load_file_in_mem(av[1]);
+    try {
+    Parser test(av[1]);
+
+    test.disp();
+    }   catch (std::exception const &e) {
+        std::cout << e.what() << std::endl;
+        exit (84);
+    }
+
 /*
     std::string a = "a";
     std::string b = "b";
