@@ -28,7 +28,7 @@ int main(int ac, char **av)
         circuit.run();
     } catch (std::exception const &e) {
         std::cout << e.what() << std::endl;
-        exit (84);
+        return 84;
     }
     return (0);
 }
