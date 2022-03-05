@@ -21,16 +21,17 @@
 #ifndef PARSERG_HPP_
 #define PARSERG_HPP_
 
-struct chipset {
-  std::string type;
-  std::string name;
-};
+//struct chipset {
+//  std::string type;
+//  std::string name;
+//};
 
 struct link {
     std::string name;
     std::size_t pin;
 };
 
+using chipset = std::pair<std::string, std::string>;
 using links = std::pair<link, link>;
 
 namespace nts {
@@ -52,7 +53,6 @@ class Parser {
         const char *_filepath;
         std::string _str;
         std::stringstream _buff;
-        std::vector<std::string> _arg;
         std::vector<chipset> _chipsets;
         std::vector<links> _links;
 };

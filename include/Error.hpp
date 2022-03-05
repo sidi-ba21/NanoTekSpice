@@ -11,7 +11,7 @@
 #ifndef ERROR_HPP_
 #define ERROR_HPP_
 
-class Error: public std::exception
+class Error : public std::exception
 {
     public:
         Error(std::string const &message, std::string const &component = "Unknown");

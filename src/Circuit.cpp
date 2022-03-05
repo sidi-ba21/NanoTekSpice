@@ -6,8 +6,8 @@
 */
 
 #include "Circuit.hpp"
-#include<algorithm>
-#include<csignal>
+#include <algorithm>
+#include <csignal>
 #include <exception>
 
 static bool _loop;
@@ -123,14 +123,14 @@ void nts::Circuit::createComponent()
 {
     auto tmp = file.getChipsets();
     for (auto const &chipsets : tmp) {
-        if (_components.find(chipsets.name) != _components.end()) {
+        if (_components.find(chipsets.second) != _components.end()) {
 		    throw "Components name already exists.";
 	    }
-        if (special_create(chipsets.name, chipsets.type));
+        if (special_create(chipsets.second, chipsets.first));
         else {
             auto component
-                (_factories.createComponent(chipsets.type, chipsets.name));
-            _components[chipsets.name] = std::move(component);
+                (_factories.createComponent(chipsets.first, chipsets.second));
+            _components[chipsets.second] = std::move(component);
         }
     }
 }

@@ -122,6 +122,7 @@ bool Parser::if_right_arg(const std::string &section)
 
 std::vector<chipset> Parser::getChipsets()
 {
+    sort(_chipsets.begin(), _chipsets.end());
     return (_chipsets);
 }
 
