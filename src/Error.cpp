@@ -23,7 +23,33 @@ char const *Error::what() const noexcept
     return _message.c_str();
 }
 
-MissionCriticalError::MissionCriticalError(std::string const &message, std::string const &component)
+ValueReceiveError::ValueReceiveError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+}
+
+
+ComponentError::ComponentError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+}
+
+ParsingValueError::ParsingValueError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+}
+
+InputValueError::InputValueError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+}
+
+OutputValueError::OutputValueError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+}
+
+PinValueError::PinValueError(std::string const &message, std::string const &component)
 : Error(message, component)
 {
 }

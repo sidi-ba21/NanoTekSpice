@@ -22,11 +22,40 @@ class Error : public std::exception
         std::string _component;
 };
 
-class MissionCriticalError : public Error
+class ValueReceiveError : public Error
 {
     public:
-        MissionCriticalError(std::string const &message, std::string const &component = "Unknown");
+        ValueReceiveError(std::string const &message, std::string const &component = "Unknown");
 };
 
+class ComponentError : public Error
+{
+    public:
+        ComponentError(std::string const &message, std::string const &component = "Unknown");
+};
+
+class ParsingValueError : public Error
+{
+    public:
+        ParsingValueError(std::string const &message, std::string const &component = "Unknown");
+};
+
+class InputValueError : public Error
+{
+    public:
+        InputValueError(std::string const &message, std::string const &component = "Unknown");
+};
+
+class OutputValueError : public Error
+{
+    public:
+        OutputValueError(std::string const &message, std::string const &component = "Unknown");
+};
+
+class PinValueError : public Error
+{
+    public:
+        PinValueError(std::string const &message, std::string const &component = "Unknown");
+};
 
 #endif /* !EXCEPTION_HPP_ */
