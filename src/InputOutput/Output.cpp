@@ -28,7 +28,7 @@ void nts::Output::display() const
 nts::Tristate nts::Output::compute(std::size_t pin)
 {
 	if (!_pins.isLinked(1))
-		throw LinkError("pin not link", "Output::compute");
+		throw LinkError("output " + _name +" isn't linked", "Output::compute");
 	_value = _pins.compute(1);
 	return _value;
 }

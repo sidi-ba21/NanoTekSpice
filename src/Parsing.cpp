@@ -52,7 +52,7 @@ int Parser::load_file_in_mem(const char *filepath)
             (_str.compare(".chipsets:") != 0 && _str.compare(".links:") != 0)))
             throw ParsingValueError("bad label", "load_file_in_mem");
         if (check && !if_right_arg(tmp))
-            throw ParsingValueError("bad number of argument in the file", "load_file_in_mem");
+            throw ParsingValueError("bad number of argument in the section " + tmp, "load_file_in_mem");
         if (_str.compare(".chipsets:") == 0 || _str.compare(".links:") == 0) {
             check = true;
             tmp = _str;
@@ -72,13 +72,13 @@ void Parser::fill_array()
 
     _buff >> tmp;
     if (tmp.compare(".chipsets") != 0)
-        throw ParsingValueError("label .chipset not here", "fill_array");
+        throw ParsingValueError("label .chipset not found", "fill_array");
     while (_buff >> tmp && tmp.compare(".links") != 0 && _buff >> tmp2) {
         _chipsets.push_back(std::make_pair(tmp, tmp2));
         count++;
     }
     if (tmp.compare(".links") != 0 || count == 0)
-        throw ParsingValueError("label .links not here", "fill_array");
+        throw ParsingValueError("label .links not found", "fill_array");
     count = 0;
     while (_buff >> tmp >> pin1 && _buff >> tmp2 >> pin2) {
         if (!is_number(pin1) || !is_number(pin2))

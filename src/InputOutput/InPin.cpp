@@ -32,7 +32,7 @@ void nts::InPin::link(IComponent &other, std::size_t otherPin)
         throw LinkError("link himself", "InPin::link");
      if (!linkExists(other, otherPin)) {
          if (isLinked())
-            throw LinkError("link no exist", "InPin::link");
+            throw LinkError("Pin linked several times", "InPin::link");
         _links.emplace_back(other, otherPin);
         other.setLink(otherPin, _component, _pin);
     }
