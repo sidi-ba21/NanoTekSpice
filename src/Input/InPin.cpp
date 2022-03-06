@@ -15,15 +15,13 @@ nts::InPin::InPin(IComponent *component, std::size_t pin) :
 
 nts::Tristate nts::InPin::compute()
 {
-    if (isLinked()) {
-        if (!_computed) {
-            _state = _links[0].first.get().compute(_links[0].second);
-            _computed = true;
-        }
-        return _state;
-    }
-    else
+    if (!isLinked())
         return Tristate::Undefined;
+    if (!_computed) {
+        _state = _links[0].first.get().compute(_links[0].second);
+        _computed = true;
+    }
+    return _state;
 }
 
 void nts::InPin::link(IComponent &other, std::size_t otherPin)

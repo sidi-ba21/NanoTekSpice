@@ -48,7 +48,7 @@ int Parser::load_file_in_mem(const char *filepath)
         throw FileWrongError("bad file", "load_file_in_mem");
     while (std::getline(file, _str)) {
         clean_buffer();
-        if (_str[0] == ':' || (_str[0] == '.' && 
+        if (_str[0] == ':' || (_str[0] == '.' &&
             (_str.compare(".chipsets:") != 0 && _str.compare(".links:") != 0)))
             throw ParsingValueError("bad label", "load_file_in_mem");
         if (check && !if_right_arg(tmp))

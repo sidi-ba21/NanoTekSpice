@@ -43,15 +43,12 @@ void nts::Input::setValue(std::string const &value)
 	if ((value.compare("U") != 0 && std::stoi(value) != 0 && 
 	std::stoi(value) != 1) || value.find('+') != value.npos)
 		throw ValueReceiveError("Input value must be either 0 or 1 or U.");
-	if (value.compare("1") == 0) {
+	if (value.compare("1") == 0)
 		setValue(Tristate::True);
-	}
-	else if (value.compare("0") == 0) {
+	else if (value.compare("0") == 0)
 		setValue(Tristate::False);
-	}
-	else if (value.compare("U") == 0) {
+	else if (value.compare("U") == 0)
 		setValue(Tristate::Undefined);
-	}
 }
 
 void nts::Input::display() const
