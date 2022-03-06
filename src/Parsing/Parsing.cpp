@@ -23,7 +23,6 @@ Parser::Parser(const char *filepath)
 
 Parser::~Parser()
 {
-
 }
 
 void Parser::clean_buffer()
