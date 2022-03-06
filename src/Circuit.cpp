@@ -91,7 +91,6 @@ void nts::Circuit::run()
 {
     std::string cmd;
     simulate(0);
-    reset();
     std::cout << "> " << std::flush;
     while (std::getline(std::cin, cmd) && cmd.compare("exit")) {
         try {

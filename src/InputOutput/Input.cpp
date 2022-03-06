@@ -13,8 +13,7 @@ nts::Input::Input(const std::string& name) : _name(name), _pin(this, 1)
 
 nts::Tristate nts::Input::compute(std::size_t pin)
 {
-	if (pin == 1)
-		_compute = true;
+	_compute = true;
 	_value = _before;
     return _value;
 }
