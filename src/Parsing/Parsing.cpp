@@ -14,6 +14,22 @@ bool is_number(const std::string &s)
   return !s.empty() && std::all_of(s.begin(), s.end(), ::isdigit);
 }
 
+bool Parser::correct_arg(const std::string &section)
+{
+    auto it = _str.find(':');
+    auto it2 = _str.find_last_of(':');
+    std::size_t nbr = std::count(_str.begin(), _str.end(), ':');
+
+    if (_str.compare(0, 7, ".links:") == 0 || _str.compare("") == 0)
+        return true;
+    if (section.compare(".chipsets:") == 0 && nbr == 0)
+        return true;
+    if ((section.compare(".links:") == 0 &&
+    nbr == 2 && isdigit(_str[it + 1]) && isdigit(_str[it2 + 1])))
+        return true;
+    return false;
+}
+
 Parser::Parser(const char *filepath)
 : _filepath(filepath)
 {
@@ -96,7 +112,6 @@ bool Parser::if_right_arg(const std::string &section)
     std::stringstream temp;
     std::string arg;
     std::size_t i = 0;
-    std::size_t nbr = std::count(_str.begin(), _str.end(), ':');
 
     temp << std::regex_replace(_str, space_re, " ") << std::endl;
     while (std::getline(temp, arg, ' ')) {
@@ -104,16 +119,15 @@ bool Parser::if_right_arg(const std::string &section)
             i++;
     }
     if (section.compare(".chipsets:") == 0 && _str.compare(".links:") != 0) {
-        if (i != 2 && arg.compare("\n") != 0 || nbr != 0)
+        if (i != 2 && arg.compare("\n") != 0)
             return false;
     }
     if (section.compare(".links:") == 0 &&
     temp.str().compare(0, 6,".links") != 0) {
-        if (i != 4 && arg.compare("\n") != 0 ||
-        nbr != 2 && arg.compare("\n") != 0)
+        if (i != 4 && arg.compare("\n") != 0)
             return false;
     }
-    return true;
+    return correct_arg(section);
 }
 
 std::vector<chipset> Parser::getChipsets()

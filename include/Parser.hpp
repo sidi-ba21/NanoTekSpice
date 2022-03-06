@@ -37,6 +37,7 @@ class Parser {
         void clean_buffer();
         void fill_array();
         int disp();
+        bool correct_arg(const std::string &section);
         bool if_right_arg(const std::string &section);
         std::vector<chipset> getChipsets();
         std::vector<links> getLinks();
