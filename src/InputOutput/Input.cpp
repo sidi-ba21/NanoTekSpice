@@ -40,8 +40,8 @@ void nts::Input::setValue(Tristate value)
 
 void nts::Input::setValue(std::string const &value)
 {
-	if (value.compare("U") != 0 && std::stoi(value) != 0 && 
-	std::stoi(value) != 1)
+	if ((value.compare("U") != 0 && std::stoi(value) != 0 && 
+	std::stoi(value) != 1) || value.find('+') != value.npos)
 		throw ValueReceiveError("Input value must be either 0 or 1 or U.");
 	if (value.compare("1") == 0) {
 		setValue(Tristate::True);
@@ -52,7 +52,6 @@ void nts::Input::setValue(std::string const &value)
 	else if (value.compare("U") == 0) {
 		setValue(Tristate::Undefined);
 	}
-	throw ValueReceiveError("Input value must be either 0 or 1 or U.");
 }
 
 void nts::Input::display() const
