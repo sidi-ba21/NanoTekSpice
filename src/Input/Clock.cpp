@@ -13,6 +13,7 @@ nts::Clock::Clock(const std::string& name) : Input(name)
 
 void nts::Clock::setValue(Tristate value)
 {
+	_compute = false;
 	_before = value;
 }
 
