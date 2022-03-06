@@ -19,6 +19,7 @@ class False final : public Input {
 		void setValue(Tristate value) override;
         void dump() const override;
         nts::Tristate reset() override;
+        void display() const override;
 };
 
 }

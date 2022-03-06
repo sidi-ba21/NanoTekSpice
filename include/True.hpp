@@ -18,6 +18,7 @@ class True final : public Input {
         ~True() = default;
 		void setValue(Tristate value) override;
         void dump() const override;
+        void display() const override;
         nts::Tristate reset() override;
 };
 

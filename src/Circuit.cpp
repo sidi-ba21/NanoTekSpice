@@ -37,9 +37,10 @@ void nts::Circuit::display()
 
 void nts::Circuit::simulate(size_t tick)
 {
-    if (tick != 0)
+    if (tick != 0) {
         _tick++;
-    reset();
+        reset();
+    }
 	for (auto const &output : _outputs) {
 		output.lock()->compute();
 	}
@@ -90,6 +91,7 @@ void nts::Circuit::run()
 {
     std::string cmd;
     simulate(0);
+    reset();
     std::cout << "> " << std::flush;
     while (std::getline(std::cin, cmd) && cmd.compare("exit")) {
         try {

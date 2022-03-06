@@ -10,6 +10,7 @@
 nts::False::False(const std::string& name) : Input(name)
 {
     _value = nts::Tristate::False;
+	_before = nts::Tristate::False;
 }
 
 void nts::False::setValue(Tristate value)
@@ -27,4 +28,8 @@ void nts::False::dump() const
 nts::Tristate nts::False::reset()
 {
 	return (_value);
+}
+
+void nts::False::display() const
+{
 }
