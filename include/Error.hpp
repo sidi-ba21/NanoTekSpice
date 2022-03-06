@@ -22,6 +22,24 @@ class Error : public std::exception
         std::string _component;
 };
 
+class LinkError : public Error
+{
+    public:
+        LinkError(std::string const &message, std::string const &component = "Unknown");
+};
+
+class CommandError : public Error
+{
+    public:
+        CommandError(std::string const &message, std::string const &component = "Unknown");
+};
+
+class FileWrongError : public Error
+{
+    public:
+        FileWrongError(std::string const &message, std::string const &component = "Unknown");
+};
+
 class ValueReceiveError : public Error
 {
     public:

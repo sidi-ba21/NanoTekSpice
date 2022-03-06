@@ -39,7 +39,7 @@ std::unique_ptr<nts::IComponent>
 	if (it != _components.end()) {
 		return it->second(*this, value);
 	}
-	throw std::runtime_error("Unknown component type");
+	throw ComponentError("Unknown component type", "Factory::createComponent");
 }
 
 std::unique_ptr<nts::Input>

@@ -45,14 +45,14 @@ int Parser::load_file_in_mem(const char *filepath)
     bool check = false;
 
     if (!file.is_open())
-        throw std::exception();
+        throw FileWrongError("bad file", "load_file_in_mem");
     while (std::getline(file, _str)) {
         clean_buffer();
         if (_str[0] == ':' || (_str[0] == '.' && 
             (_str.compare(".chipsets:") != 0 && _str.compare(".links:") != 0)))
-            throw std::exception();
+            throw ParsingValueError("bad label", "load_file_in_mem");
         if (check && !if_right_arg(tmp))
-            throw std::exception();
+            throw ParsingValueError("bad number of argument in the file", "load_file_in_mem");
         if (_str.compare(".chipsets:") == 0 || _str.compare(".links:") == 0) {
             check = true;
             tmp = _str;
@@ -72,29 +72,23 @@ void Parser::fill_array()
 
     _buff >> tmp;
     if (tmp.compare(".chipsets") != 0)
-        throw std::exception();
+        throw ParsingValueError("label .chipset not here", "fill_array");
     while (_buff >> tmp && tmp.compare(".links") != 0 && _buff >> tmp2) {
         _chipsets.push_back(std::make_pair(tmp, tmp2));
         count++;
     }
     if (tmp.compare(".links") != 0 || count == 0)
-        throw std::exception();
+        throw ParsingValueError("label .links not here", "fill_array");
     count = 0;
     while (_buff >> tmp >> pin1 && _buff >> tmp2 >> pin2) {
         if (!is_number(pin1) || !is_number(pin2))
-            throw std::exception();
+            throw PinValueError("Bad number pin", "fill_array");
         _links.push_back((links){(link){tmp, (std::size_t)std::stoi(pin1)},
             (link){tmp2, (std::size_t)std::stoi(pin2)}});
         count++;
     }
     if (count == 0)
-        throw std::exception();
-}
-
-int Parser::disp()
-{
-    std::cout << _str << std::endl;
-    return 0;
+        throw ParsingValueError("empty section", "fill_array");
 }
 
 bool Parser::if_right_arg(const std::string &section)

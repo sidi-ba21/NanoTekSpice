@@ -29,10 +29,10 @@ nts::Tristate nts::InPin::compute()
 void nts::InPin::link(IComponent &other, std::size_t otherPin)
 {
     if (isSelf(other, otherPin))
-        throw std::exception();
+        throw LinkError("link himself", "InPin::link");
      if (!linkExists(other, otherPin)) {
          if (isLinked())
-            throw std::exception();
+            throw LinkError("link no exist", "InPin::link");
         _links.emplace_back(other, otherPin);
         other.setLink(otherPin, _component, _pin);
     }

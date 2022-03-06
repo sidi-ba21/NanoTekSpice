@@ -15,7 +15,7 @@ nts::OutPin::OutPin(IComponent *component, std::size_t pin) :
 void nts::OutPin::link(IComponent &other, std::size_t otherPin)
 {
     if (isSelf(other, otherPin))
-        throw std::exception();
+        throw LinkError("link himself", "OutPin::link");
     if (!linkExists(other, otherPin)) {
         _links.emplace_back(other, otherPin);
 	    other.setLink(otherPin, _component, _pin);

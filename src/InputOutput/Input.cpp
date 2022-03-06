@@ -21,7 +21,7 @@ nts::Tristate nts::Input::compute(std::size_t pin)
 void nts::Input::setLink(std::size_t pin, IComponent &other, std::size_t otherPin)
 {
 	if (pin != 1)
-		throw std::exception();
+		throw LinkError("bad pin != 1", "Input::setlink");
 	_pin.link(other, otherPin);
 }
 
@@ -42,7 +42,7 @@ void nts::Input::setValue(std::string const &value)
 {
 	if (value.compare("U") != 0 && std::stoi(value) != 0 && 
 	std::stoi(value) != 1)
-		throw std::runtime_error("Input value must be either 0 or 1 or U.");
+		throw ValueReceiveError("Input value must be either 0 or 1 or U.");
 	if (value.compare("1") == 0) {
 		setValue(Tristate::True);
 	}
@@ -52,7 +52,7 @@ void nts::Input::setValue(std::string const &value)
 	else if (value.compare("U") == 0) {
 		setValue(Tristate::Undefined);
 	}
-	throw std::runtime_error("Input value must be either 0 or 1 or U.");
+	throw ValueReceiveError("Input value must be either 0 or 1 or U.");
 }
 
 void nts::Input::display() const

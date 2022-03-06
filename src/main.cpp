@@ -11,19 +11,16 @@
 #include "Parser.hpp"
 #include <fstream>
 
-int basic_error(int ac, char **av)
+void basic_error(int ac, char **av)
 {
-    if (ac < 2) {
-        std::cerr << "Nanoteksptice: Usage: ./nanotekspice file.nts" << std::endl;
-        exit(84);
-    }
-    return 0;
+    if (ac != 2)
+        throw FileWrongError("Nanoteksptice: Usage: ./nanotekspice file.nts");
 }
 
 int main(int ac, char **av)
 {
-    basic_error(ac, av);
     try {
+        basic_error(ac, av);
         nts::Circuit circuit(av[1]);
         circuit.run();
     } catch (std::exception const &e) {

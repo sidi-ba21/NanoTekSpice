@@ -15,6 +15,7 @@
 #include <tuple>
 #include <vector>
 #include <functional>
+#include "Error.hpp"
 
 namespace nts
 {

@@ -23,6 +23,24 @@ char const *Error::what() const noexcept
     return _message.c_str();
 }
 
+LinkError::LinkError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+
+}
+
+CommandError::CommandError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+
+}
+
+FileWrongError::FileWrongError(std::string const &message, std::string const &component)
+: Error(message, component)
+{
+
+}
+
 ValueReceiveError::ValueReceiveError(std::string const &message, std::string const &component)
 : Error(message, component)
 {

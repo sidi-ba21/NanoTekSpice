@@ -74,7 +74,7 @@ void nts::Circuit::set_value(const std::string &name, const std::string &value)
         try {
             std::stoi(value);
         } catch (std::exception const &e) {
-            throw std::runtime_error("Input value must be either 0 or 1 or U.");
+            throw ValueReceiveError("Input value must be either 0 or 1 or U.");
         }
     }
     for (auto &comp : _inputs) {
@@ -83,7 +83,7 @@ void nts::Circuit::set_value(const std::string &name, const std::string &value)
             return;
         }
     }
-    throw std::runtime_error("Input error: Components doesn't exist.");
+    throw ValueReceiveError("Input error: Components doesn't exist.");
 }
 
 void nts::Circuit::run()
@@ -114,7 +114,7 @@ void nts::Circuit::execute(const std::string &name)
         return;
     }
     else if (it == _command.end())
-        throw std::runtime_error("Unknown command");
+        throw CommandError("Unknown command", "circuit::execute");
     it->second(*this);
 }
 
@@ -129,7 +129,7 @@ void nts::Circuit::createComponent()
     auto tmp = file.getChipsets();
     for (auto const &chipsets : tmp) {
         if (_components.find(chipsets.second) != _components.end()) {
-		    throw "Components name already exists.";
+		    throw ComponentError("Components name already exists.", "create_component");
 	    }
         if (special_create(chipsets.second, chipsets.first));
         else {
@@ -146,10 +146,10 @@ void nts::Circuit::createLink()
     for (auto const &tmp : all_link) {
         auto firstcomponent {_components.find(tmp.first.name)};
         if (firstcomponent == _components.end())
-            throw "link error: components " + tmp.first.name + " doesn't exist";
+            throw LinkError("link error: components " + tmp.first.name + " doesn't exist");
         auto secondcomponent {_components.find(tmp.second.name)};
         if (secondcomponent == _components.end())
-            throw "link error: components " + tmp.second.name + " doesn't exist";
+            throw LinkError("link error: components " + tmp.second.name + " doesn't exist");
         firstcomponent->second->setLink(tmp.first.pin, *secondcomponent->second, tmp.second.pin);
     }
 }
@@ -209,19 +209,19 @@ bool nts::Circuit::special_create(const std::string &name, const std::string &ty
     if (type.compare("input") == 0){
         createInput(name);
         state = true;
-        }
+    }
     else if (type.compare("output") == 0){
         createOutput(name);
         state = true;
-        }
+    }
     else if (type.compare("true") == 0) {
         createTrue(name);
         state = true;
-        }
+    }
     else if (type.compare("false") == 0) {
         createFalse(name);
         state = true;
-        }
+    } 
     else if (type.compare("clock") == 0) {
         createClock(name);
         state = true;
