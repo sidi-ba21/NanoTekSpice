@@ -15,6 +15,9 @@ void basic_error(int ac, char **av)
 {
     if (ac != 2)
         throw FileWrongError("Nanoteksptice: Usage: ./nanotekspice file.nts");
+    std::string file(av[1]);
+    if (file.find_last_of(".nts") != file.size() -1)
+        throw FileWrongError("Nanoteksptice: Usage: ./nanotekspice file.nts");
 }
 
 int main(int ac, char **av)
